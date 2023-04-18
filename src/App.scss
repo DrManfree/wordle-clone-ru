@@ -4,9 +4,12 @@
 
     .header {
         margin: 15px;
+        padding-bottom: 10px;
 
         font-size: 42px;
         text-align: center;
+
+        border-bottom: 1px solid black;
     }
 
     .field {
@@ -108,6 +111,39 @@
             
             &.gray {
                 background: gray;
+            }
+        }
+
+        .divider {
+            flex-basis: 100%;
+        }
+
+        @media screen and (max-width: 630px) {
+            .key {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+                line-height: 40px;
+                border-radius: 10px;
+            }
+        }
+
+        @media screen and (max-width: 510px) {
+            .divider:first-of-type {
+                order: 99;
+            }
+            .enter {
+                order: 99;
+            }
+            .backspace {
+                order: 99;
+                width: 155px;
+            }
+        }
+
+        @media screen and (max-width: 465px) {
+            .divider:nth-of-type(2) {
+                order: 100;
             }
         }
     }

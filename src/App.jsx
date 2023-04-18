@@ -167,20 +167,62 @@ export const App = () => {
       </div>
 
       <div className='keyboard'>
-        { ALPHABET.map ((letter, index) => {
-            let classnames = 'key ' + keyColors[letter.toLowerCase()];
+        {
+          ALPHABET.slice(0, 12).map((letter, index) => {
+            let classnames = 'key ';
+            if (keyColors[letter.toLowerCase()])
+              classnames += keyColors[letter.toLowerCase()];
             if (letter === '<')
               classnames += ' backspace';
             else if (letter === '✓')
               classnames += ' enter';
 
-            let element = 
+            let element =
               <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
                 {letter}
               </button>;
-  
+
             return element;
-        })}
+          })
+        }
+          <div className='divider'></div>
+        {
+          ALPHABET.slice(13, 24).map((letter, index) => {
+            let classnames = 'key ';
+            if (keyColors[letter.toLowerCase()])
+              classnames += keyColors[letter.toLowerCase()];
+            if (letter === '<')
+              classnames += ' backspace';
+            else if (letter === '✓')
+              classnames += ' enter';
+
+            let element =
+              <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
+                {letter}
+              </button>;
+
+            return element;
+          })
+        }
+          <div className='divider'></div>
+        {
+          ALPHABET.slice(26).map((letter, index) => {
+            let classnames = 'key ';
+            if (keyColors[letter.toLowerCase()])
+              classnames += keyColors[letter.toLowerCase()];
+            if (letter === '<')
+              classnames += ' backspace';
+            else if (letter === '✓')
+              classnames += ' enter';
+
+            let element =
+              <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
+                {letter}
+              </button>;
+
+            return element;
+          })
+        }
       </div>
 
     </div>
