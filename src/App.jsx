@@ -189,7 +189,7 @@ export const App = () => {
         }
           <div className='divider'></div>
         {
-          ALPHABET.slice(13, 24).map((letter, index) => {
+          ALPHABET.slice(12, 24).map((letter, index) => {
             let classnames = 'key ';
             if (keyColors[letter.toLowerCase()])
               classnames += keyColors[letter.toLowerCase()];
@@ -208,7 +208,7 @@ export const App = () => {
         }
           <div className='divider'></div>
         {
-          ALPHABET.slice(26).map((letter, index) => {
+          ALPHABET.slice(24).map((letter, index) => {
             let classnames = 'key ';
             if (keyColors[letter.toLowerCase()])
               classnames += keyColors[letter.toLowerCase()];
