@@ -1,3 +1,17 @@
+$color-green: rgb(11, 220, 11);
+$color-yellow: rgb(223 223 11);
+$color-gray: rgb(91, 91, 91);
+$color-default: rgb(162, 162, 162);
+$color-blue: blue;
+$color-red: red;
+
+$color-default-dark: rgb(107, 107, 107);
+$color-gray-dark: rgb(39, 39, 39);
+$color-yellow-dark: rgb(139, 139, 0);
+$color-green-dark: green;
+$color-red-dark: rgb(152, 0, 0);
+$color-blue-dark: rgb(0, 0, 153);
+
 .App {
     margin: auto;
     width: fit-content;
@@ -31,7 +45,7 @@
                 border-radius: 10px;
                 border: 1px solid black;
 
-                background: rgb(200, 200, 200);
+                background: $color-default;
 
                 text-align: center;
                 line-height: 45px;
@@ -41,15 +55,15 @@
                 transition-property: background;
 
                 &.green {
-                    background: rgb(11, 220, 11);
+                    background: $color-green;
                 }
                 
                 &.yellow {
-                    background: rgb(232, 232, 22);
+                    background: $color-yellow;
                 }
                 
                 &.gray {
-                    background: gray;
+                    background: $color-gray;
                 }
             }
         }
@@ -77,8 +91,8 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 36px;
 
-            background: rgb(200, 200, 200);
-            border: 1px solid black;
+            background: $color-default;
+            border: none;
 
             user-select: none;
 
@@ -86,31 +100,44 @@
             transition-property: background;
 
             &:hover {
-                background: rgb(160, 160, 160);
+                background: $color-default-dark;
+                color: white;
             }
             &.backspace {
-                background: rgb(220, 104, 104);
+                background: $color-red;
                 &:hover {
-                    background: rgb(160, 104, 104);
+                    background: $color-red-dark;
                 }
             }
             &.enter {
-                background:rgb(104, 104, 222);
+                background: $color-blue;
                 width: 155px;
                 &:hover {
-                    background: rgb(96, 96, 182);
+                    background: $color-blue-dark;
                 }
             }
             &.green {
-                background: rgb(11, 220, 11);
+                background: $color-green;
+                &:hover {
+                    background: $color-green-dark;
+                    color: white;
+                }
             }
             
             &.yellow {
-                background: rgb(232, 232, 22);
+                background: $color-yellow;
+                &:hover {
+                    background: $color-yellow-dark;
+                    color: white;
+                }
             }
             
             &.gray {
-                background: gray;
+                background: $color-gray;
+                &:hover {
+                    background: $color-gray-dark;
+                    color: white;
+                }
             }
         }
 
