@@ -23,6 +23,7 @@ export const App = () => {
   const [activeRow, setActiveRow] = useState(0);
   const [activeLetter, setActiveLetter] = useState(0);
   const [win, setWin] = useState(false);
+  const [typedWords, setTypedWords] = useState([]);
 
   function validateRow(rowIndex) {
     let letters = rows[rowIndex];
@@ -122,8 +123,9 @@ export const App = () => {
         setWin(true);
       }
 
-      else if (WORDS.includes(typedWord)) {
+      else if (WORDS.includes(typedWord) && !typedWords.includes(typedWord)) {
         validateRow(activeRow);
+        setTypedWords(prev => [...prev, typedWord]);
         setActiveRow(activeRow + 1);
         setActiveLetter(0);
       }
