@@ -1,0 +1,114 @@
+.App {
+    margin: auto;
+    width: fit-content;
+
+    .header {
+        margin: 15px;
+
+        font-size: 42px;
+        text-align: center;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+
+            .cell {
+                width: 55px;
+                height: 55px;
+
+                border-radius: 10px;
+                border: 1px solid black;
+
+                background: rgb(200, 200, 200);
+
+                text-align: center;
+                line-height: 45px;
+                font-size: 48px;
+
+                transition: 0.5s;
+                transition-property: background;
+
+                &.green {
+                    background: rgb(11, 220, 11);
+                }
+                
+                &.yellow {
+                    background: rgb(232, 232, 22);
+                }
+                
+                &.gray {
+                    background: gray;
+                }
+            }
+        }
+    }
+
+    .keyboard {
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5px;
+
+        max-width: 650px;
+
+        .key {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 15px;
+
+            text-align: center;
+            line-height: 50px;
+
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 36px;
+
+            background: rgb(200, 200, 200);
+            border: 1px solid black;
+
+            user-select: none;
+
+            transition: 0.25s;
+            transition-property: background;
+
+            &:hover {
+                background: rgb(160, 160, 160);
+            }
+            &.backspace {
+                background: rgb(220, 104, 104);
+                &:hover {
+                    background: rgb(160, 104, 104);
+                }
+            }
+            &.enter {
+                background:rgb(104, 104, 222);
+                width: 155px;
+                &:hover {
+                    background: rgb(96, 96, 182);
+                }
+            }
+            &.green {
+                background: rgb(11, 220, 11);
+            }
+            
+            &.yellow {
+                background: rgb(232, 232, 22);
+            }
+            
+            &.gray {
+                background: gray;
+            }
+        }
+    }
+}
