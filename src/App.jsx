@@ -1,31 +1,25 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import './App.scss';
 import { WORDS } from './russian_nouns';
-
-const ALPHABET = [
-  'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ',
-  'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', '<',
-  'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '✓'
-];
-
-function getRandomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
+import { Field } from './components/Field/Field';
+import { ALPHABET, TRIES, WORD_LENGTH } from './constants/index';
+import { getRandomInteger } from './constants/helpers';
+import { Row } from './components/Keyboard/Row/Row';
 
 const winWord = WORDS[getRandomInteger(0, WORDS.length)];
 console.log(winWord);
 
 export const App = () => {
 
-  const [rows, setRows] = useState(new Array(6).fill(new Array(5).fill('')));
-  const [colors, setColors] = useState(new Array(6).fill(new Array(5).fill('')));
+  const [rows, setRows] = useState(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
+  const [colors, setColors] = useState(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
   const [keyColors, setKeyColors] = useState({});
   const [activeRow, setActiveRow] = useState(0);
   const [activeLetter, setActiveLetter] = useState(0);
   const [win, setWin] = useState(false);
   const [typedWords, setTypedWords] = useState([]);
 
-  function validateRow(rowIndex) {
+  const validateRow = useCallback((rowIndex) => {
     let letters = rows[rowIndex];
 
     for (let i = 0; i < letters.length; i++) {
@@ -94,9 +88,9 @@ export const App = () => {
         }
       }
     }
-  }
+  }, [rows, keyColors]);
 
-  function handleInput(letter) {
+  const handleInput = useCallback((letter) => {
     if (letter === '<') {
       if (activeLetter === 0 || win) return;
 
@@ -147,84 +141,35 @@ export const App = () => {
       });
       setActiveLetter(activeLetter + 1);
     }
-  }
+  }, [activeLetter, activeRow, rows, typedWords, validateRow, win]);
 
   return (
     <div className="App">
       <h1 className='header'>Wordle Clone</h1>
 
-      <div className='field'>
-        {rows.map((row, rowIndex) => {
-          return (
-          <div className='row' key={rowIndex}>
-            {row.map((cell, cellIndex) => {
-              let classnames = 'cell ' + colors[rowIndex][cellIndex];
-              return (
-              <div className={classnames} key={cellIndex}>
-                {cell}
-              </div>);
-            })}
-          </div>);
-        })}
-      </div>
+      <Field
+        rows={rows}
+        colors={colors}
+      />
 
       <div className='keyboard'>
-        {
-          ALPHABET.slice(0, 12).map((letter, index) => {
-            let classnames = 'key ';
-            if (keyColors[letter.toLowerCase()])
-              classnames += keyColors[letter.toLowerCase()];
-            if (letter === '<')
-              classnames += ' backspace';
-            else if (letter === '✓')
-              classnames += ' enter';
-
-            let element =
-              <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
-                {letter}
-              </button>;
-
-            return element;
-          })
-        }
-          <div className='divider'></div>
-        {
-          ALPHABET.slice(12, 24).map((letter, index) => {
-            let classnames = 'key ';
-            if (keyColors[letter.toLowerCase()])
-              classnames += keyColors[letter.toLowerCase()];
-            if (letter === '<')
-              classnames += ' backspace';
-            else if (letter === '✓')
-              classnames += ' enter';
-
-            let element =
-              <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
-                {letter}
-              </button>;
-
-            return element;
-          })
-        }
-          <div className='divider'></div>
-        {
-          ALPHABET.slice(24).map((letter, index) => {
-            let classnames = 'key ';
-            if (keyColors[letter.toLowerCase()])
-              classnames += keyColors[letter.toLowerCase()];
-            if (letter === '<')
-              classnames += ' backspace';
-            else if (letter === '✓')
-              classnames += ' enter';
-
-            let element =
-              <button className={classnames} key={index} onClick={() => handleInput(letter.toLowerCase())}>
-                {letter}
-              </button>;
-
-            return element;
-          })
-        }
+        <Row
+          letters={ALPHABET.slice(0, 12)}
+          keyColors={keyColors}
+          handleInput={handleInput}
+        />
+        <div className='divider'></div>
+        <Row
+          letters={ALPHABET.slice(12, 24)}
+          keyColors={keyColors}
+          handleInput={handleInput}
+        />
+        <div className='divider'></div>
+        <Row
+          letters={ALPHABET.slice(24)}
+          keyColors={keyColors}
+          handleInput={handleInput}
+        />
       </div>
 
     </div>

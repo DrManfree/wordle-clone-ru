@@ -1,0 +1,99 @@
+@import '../../../constants/colors.scss';
+
+.key {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+
+    text-align: center;
+    line-height: 50px;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 36px;
+
+    background: $color-default;
+    border: none;
+
+    user-select: none;
+
+    transition: 0.25s;
+    transition-property: background;
+
+    &:hover {
+        background: $color-default-dark;
+        color: white;
+    }
+    &.backspace {
+        background: $color-red;
+        &:hover {
+            background: $color-red-dark;
+        }
+    }
+    &.enter {
+        background: $color-blue;
+        width: 155px;
+        &:hover {
+            background: $color-blue-dark;
+        }
+    }
+
+    &.green {
+        background: $color-green;
+        &:hover {
+            background: $color-green-dark;
+            color: white;
+        }
+    }   
+    &.yellow {
+        background: $color-yellow;
+        &:hover {
+            background: $color-yellow-dark;
+            color: white;
+        }
+    }  
+    &.gray {
+        background: $color-gray;
+        &:hover {
+            background: $color-gray-dark;
+            color: white;
+        }
+    }
+
+    @media screen and (max-width: 630px) {
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+        line-height: 40px;
+        border-radius: 10px;
+    }
+    
+    @media screen and (max-width: 510px) {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 7px;
+
+        .enter {
+            order: 99;
+            flex-basis: 40%;
+        }
+        .backspace {
+            order: 98;
+            flex-basis: 40%;
+        }
+    }
+    
+    @media screen and (max-width: 450px) {
+        width: 28px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 25px;
+    }
+    
+    @media screen and (max-width: 370px) {
+        width: 23px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
