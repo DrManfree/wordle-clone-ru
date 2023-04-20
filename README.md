@@ -6,7 +6,7 @@ Code subject to change.
 
 TODO:
 
-- Mobile version (the game works on mobile, although the keyboard is a mess and you can't use the native keyboard to type)
+- Mobile version (<s> a more comfortable keyboard </s>; ability to use the native mobile keyboard)
 - Error validation (display errors when typing an invalid word, etc.)
 - Code refactoring (optimize logic, split app into different components)
 - Style changes (animations, better fonts/colors, etc.)
