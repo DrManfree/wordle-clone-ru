@@ -1,11 +1,15 @@
 @import './constants/colors.scss';
 
 .App {
-    margin: auto;
-    width: fit-content;
+    margin: 0;
+    height: 100vh;
+
+    background: rgb(223, 255, 255);
 
     .header {
-        margin: 15px;
+        max-width: 650px;
+
+        margin: auto;
         padding-bottom: 10px;
 
         font-size: 42px;
@@ -15,16 +19,32 @@
     }
 
     .keyboard {
+        margin: auto;
 
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         gap: 2.5px;
+
         max-width: 650px;
 
         .divider {
             flex-basis: 100%;
         }
+    }
+
+    &.pulse {
+        animation: pulse 1s ease 0s 1 normal forwards;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background: rgb(223, 255, 255);
+    }
+
+    50% {
+        background: rgb(174, 252, 174);
     }
 }

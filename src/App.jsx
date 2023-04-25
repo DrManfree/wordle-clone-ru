@@ -5,9 +5,7 @@ import { Field } from './components/Field/Field';
 import { ALPHABET, TRIES, WORD_LENGTH } from './constants/index';
 import { getRandomInteger } from './constants/helpers';
 import { Row } from './components/Keyboard/Row/Row';
-
-const winWord = WORDS[getRandomInteger(0, WORDS.length)];
-console.log(winWord);
+import { Controls } from './components/Controls/Controls';
 
 export const App = () => {
 
@@ -18,6 +16,22 @@ export const App = () => {
   const [activeLetter, setActiveLetter] = useState(0);
   const [win, setWin] = useState(false);
   const [typedWords, setTypedWords] = useState([]);
+  const [winWord, setWinWord] = useState(WORDS[getRandomInteger(0, WORDS.length)]);
+
+  const [newGameAnimation, setNewGameAnimation] = useState(false);
+
+  const startNewGame = useCallback(() => {
+    setWinWord(WORDS[getRandomInteger(0, WORDS.length)]);
+    setRows(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
+    setColors(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
+    setKeyColors({});
+    setActiveRow(0);
+    setActiveLetter(0);
+    setWin(false);
+    setTypedWords([]);
+
+    setNewGameAnimation(true);
+  }, []);
 
   const validateRow = useCallback((rowIndex) => {
     let letters = rows[rowIndex];
@@ -88,7 +102,7 @@ export const App = () => {
         }
       }
     }
-  }, [rows, keyColors]);
+  }, [rows, keyColors, winWord]);
 
   const handleInput = useCallback((letter) => {
     if (letter === '<') {
@@ -141,12 +155,15 @@ export const App = () => {
       });
       setActiveLetter(activeLetter + 1);
     }
-  }, [activeLetter, activeRow, rows, typedWords, validateRow, win]);
+  }, [activeLetter, activeRow, rows, typedWords, validateRow, win, winWord]);
 
   return (
-    <div className="App">
+    <div 
+      className={newGameAnimation ? 'App pulse' : 'App'}
+      onAnimationEnd={() => setNewGameAnimation(false)}
+    >
       <h1 className='header'>Wordle Clone</h1>
-
+      <Controls clickNewGame={() => startNewGame()}/>
       <Field
         rows={rows}
         colors={colors}

@@ -23,6 +23,7 @@
     &:hover {
         background: $color-default-dark;
         color: white;
+        cursor: pointer;
     }
     &.backspace {
         background: $color-red;
