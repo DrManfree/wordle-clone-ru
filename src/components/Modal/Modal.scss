@@ -24,7 +24,9 @@
         font-size: 18px;
         line-height: 22px;
 
-        .close {
+        animation: openModal 0.4s ease-out forwards;
+
+        .closeBtn {
             position: absolute;
             top: 5px;
             right: 5px;
@@ -38,4 +40,9 @@
             font-size: 24px;
         }
     }
+}
+
+@keyframes openModal {
+    0% { transform: translateY(-300%); }
+    100% { transform: translateY(0); }
 }

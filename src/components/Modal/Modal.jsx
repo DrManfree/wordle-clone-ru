@@ -1,10 +1,11 @@
 import './Modal.scss';
 
 export const Modal = ({ setOpen, mode }) => {
+
     return(
         <div className='modal'>
             <div className='content'>
-                <button className='close' onClick={() => setOpen('')}>
+                <button className='closeBtn' onClick={() => setOpen('')}>
                     x
                 </button>
                 {mode === 'about' &&
