@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.scss';
 import { WORDS } from './russian_nouns';
 import { Field } from './components/Field/Field';
@@ -9,8 +9,9 @@ import { Controls } from './components/Controls/Controls';
 
 export const App = () => {
 
-  const [rows, setRows] = useState(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
-  const [colors, setColors] = useState(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
+  const [tries, setTries] = useState(TRIES);
+  const [rows, setRows] = useState(new Array(tries).fill(new Array(WORD_LENGTH).fill('')));
+  const [colors, setColors] = useState(new Array(tries).fill(new Array(WORD_LENGTH).fill('')));
   const [keyColors, setKeyColors] = useState({});
   const [activeRow, setActiveRow] = useState(0);
   const [activeLetter, setActiveLetter] = useState(0);
@@ -22,8 +23,8 @@ export const App = () => {
 
   const startNewGame = useCallback(() => {
     setWinWord(WORDS[getRandomInteger(0, WORDS.length)]);
-    setRows(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
-    setColors(new Array(TRIES).fill(new Array(WORD_LENGTH).fill('')));
+    setRows(new Array(tries).fill(new Array(WORD_LENGTH).fill('')));
+    setColors(new Array(tries).fill(new Array(WORD_LENGTH).fill('')));
     setKeyColors({});
     setActiveRow(0);
     setActiveLetter(0);
@@ -31,7 +32,13 @@ export const App = () => {
     setTypedWords([]);
 
     setNewGameAnimation(true);
+  }, [tries]);
+
+  const changeTries = useCallback((newTries) => {
+    setTries(newTries);
   }, []);
+
+  useEffect(() => startNewGame(), [tries, startNewGame]);
 
   const validateRow = useCallback((rowIndex) => {
     let letters = rows[rowIndex];
@@ -122,7 +129,7 @@ export const App = () => {
       setActiveLetter(activeLetter - 1);
     }
     else if (letter === '✓') {
-      if (activeLetter !== 5 || win) return;
+      if (activeLetter !== WORD_LENGTH || win) return;
 
       let typedWord = rows[activeRow].join('');
 
@@ -141,7 +148,7 @@ export const App = () => {
       else return;
     }
     else {
-      if (activeLetter === 5 || win) return;
+      if (activeLetter === WORD_LENGTH || win || activeRow >= tries) return;
       setRows(prevRows => {
         return ([
           ...prevRows.slice(0, activeRow),
@@ -155,7 +162,7 @@ export const App = () => {
       });
       setActiveLetter(activeLetter + 1);
     }
-  }, [activeLetter, activeRow, rows, typedWords, validateRow, win, winWord]);
+  }, [activeLetter, activeRow, rows, typedWords, validateRow, win, winWord, tries]);
 
   return (
     <div 
@@ -163,7 +170,11 @@ export const App = () => {
       onAnimationEnd={() => setNewGameAnimation(false)}
     >
       <h1 className='header'>Wordle Clone</h1>
-      <Controls clickNewGame={() => startNewGame()}/>
+      <Controls 
+        clickNewGame={() => startNewGame()}
+        changeTries={changeTries}
+        tries={tries}
+      />
       <Field
         rows={rows}
         colors={colors}

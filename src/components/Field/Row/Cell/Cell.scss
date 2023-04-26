@@ -10,9 +10,9 @@
     background: $color-default;
 
     text-align: center;
-    line-height: 45px;
+    line-height: 48px;
     font-size: 54px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, monospace;
+    font-family:Arial, Helvetica, sans-serif;
 
     transition: 0.5s;
     transition-property: background;
@@ -34,28 +34,30 @@
     @media screen and (max-width: 630px) {
         width: 50px;
         height: 50px;
-        font-size: 52px;
-        line-height: 40px;
+        font-size: 50px;
+        line-height: 45px;
         border-radius: 10px;
     }
     
     @media screen and (max-width: 510px) {
         width: 48px;
         height: 48px;
-        line-height: 40px;
+        font-size: 45px;
+        line-height: 42px;
         border-radius: 7px;
     }
     
     @media screen and (max-width: 450px) {
         width: 45px;
         height: 45px;
-        line-height: 36px;
-        font-size: 48px;
+        line-height: 40px;
+        font-size: 42px;
     }
     
     @media screen and (max-width: 370px) {
         width: 40px;
         height: 40px;
-        font-size: 40px;
+        font-size: 36px;
+        line-height: 36px;
     }
 }

@@ -2,21 +2,26 @@ import { useState } from 'react';
 import './Controls.scss';
 import { Modal } from '../Modal/Modal';
 
-export const Controls = ({ clickNewGame }) => {
+export const Controls = ({ clickNewGame, changeTries, tries }) => {
     const [modal, setModal] = useState('');
 
     return (
         <div className="controls-panel">
             <button className="controls-button" onClick={clickNewGame}>
-                New game
+                Новая игра
             </button>
             <button className="controls-button" onClick={() => setModal('about')}>
-                About
+                Об игре
             </button>
             <button className="controls-button" onClick={() => setModal('settings')}>
-                Settings
+                Настройки
             </button>
-            {modal !== '' && <Modal setOpen={() => setModal('')} mode={modal}/>}
+            {modal !== '' && 
+                <Modal 
+                    setOpen={() => setModal('')} mode={modal}
+                    changeTries={changeTries}
+                    tries={tries}
+                />}
         </div>
     );
 }
